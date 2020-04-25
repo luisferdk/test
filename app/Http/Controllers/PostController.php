@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,8 +15,9 @@ class PostController extends Controller
    */
   public function index()
   {
-    $posts = Post::with('user', 'comments')->get();
-    return view('posts.index', ['posts' => $posts]);
+    $posts = Post::with('user', 'comments')->orderBy('id', 'desc')->get();
+    $users = User::all();
+    return view('posts.index', ['posts' => $posts, 'users' => $users]);
   }
 
   /**
@@ -25,7 +27,8 @@ class PostController extends Controller
    */
   public function create()
   {
-    //
+    $users = User::all();
+    return view('posts.create', ['users' => $users]);
   }
 
   /**
@@ -36,7 +39,14 @@ class PostController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+      'title' => 'required|string|min:6',
+      'description' => 'required|string|min:10',
+      'user_id' => 'required|integer',
+    ]);
+
+    $post = Post::create($request->all());
+    return redirect('/posts')->with('create', true);
   }
 
   /**
@@ -47,7 +57,8 @@ class PostController extends Controller
    */
   public function show(Post $post)
   {
-    //
+    $users = User::all();
+    return view('posts.show', ['post' => $post, 'users' => $users]);
   }
 
   /**
@@ -58,7 +69,8 @@ class PostController extends Controller
    */
   public function edit(Post $post)
   {
-    //
+    $users = User::all();
+    return view('posts.edit', ["post" => $post, 'users' => $users]);
   }
 
   /**
@@ -70,7 +82,17 @@ class PostController extends Controller
    */
   public function update(Request $request, Post $post)
   {
-    //
+    $request->validate([
+      'title' => 'required|string|min:6',
+      'description' => 'required|string|min:10',
+      'user_id' => 'required|integer',
+    ]);
+
+    $update = $post->update($request->all());
+    if ($update)
+      return redirect('/posts')->with('update', true);
+    else
+      return redirect('/posts')->with('update', false);
   }
 
   /**
@@ -81,6 +103,11 @@ class PostController extends Controller
    */
   public function destroy(Post $post)
   {
-    //
+    $post->comments()->delete();
+    $delete = $post->delete();
+    if ($delete)
+      return redirect('/posts')->with('delete', true);
+    else
+      return redirect('/posts')->with('delete', false);
   }
 }

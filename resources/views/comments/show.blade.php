@@ -28,47 +28,23 @@ Post {{ $post->name }}
           </div>
         </div>
         <div class="card-body">{{ $post->description }}</div>
+        @if(count($post->comments)>0)
         <div class="card-footer">
           <div class="row">
             <h5 class="col-12 text-primary mb-3">Comments</h5>
-            <form class="col-12 mb-3" action='{{ url("/comments?post=$post->id") }}' method="POST">
-              @csrf
-              <input type="hidden" name="post_id" value="{{ $post->id }}">
-              <div class="form-row align-items-center">
-                <div class="col-auto">
-                  <textarea name="description" placeholder="Enter Comment" rows="1" class="form-control mb-2" required></textarea>
-                </div>
-                <div class="col-auto">
-                  <select name="user_id" id="" class="form-control mb-2" required>
-                    <option value="">Choose one</option>
-                    @foreach ($users as $user)
-                      <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                    <option value=""></option>
-                  </select>
-                </div>
-                <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-2">Submit</button>
-                </div>
-                @include('layouts.errors')
-              </div>
-            </form>
               @foreach($post->comments as $comment)
               <div class="col-12 mb-3 pb-3 border-bottom">
                 <h6>{{ $comment->user->name }}</h6>
                 <p>{{ $comment->description }}</p>
                 <div>
-                  <a href='{{ url("comments/$comment->id/edit") }}' class="btn btn-warning pt-0 pb-0">Edit</a>
-                  <button onclick="document.getElementById('deleteComment').submit()" class="btn btn-danger pt-0 pb-0">Delete</button>
-                  <form id="deleteComment" action='{{ url("/comments/$comment->id") }}' method="POST">
-                    @csrf
-                    @method('DELETE')
-                  </form>
+                  <button class="btn btn-warning pt-0 pb-0">Edit</button>
+                  <button class="btn btn-danger pt-0 pb-0 ">Delete</button>
                 </div>
               </div>
               @endforeach
           </div>
         </div>
+        @endif
       </div>
     </div>
   </div>

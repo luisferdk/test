@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
 
     /* Comments */
     DB::table('comments')->truncate();
-    for ($i = 0; $i < 20; $i++) {
+    for ($i = 0; $i < 100; $i++) {
       DB::table('comments')->insert([
         'description' => $faker->sentence(20, true),
         'user_id' => $faker->numberBetween(1, 20),
