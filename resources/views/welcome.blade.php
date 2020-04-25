@@ -25,8 +25,9 @@
   <div class="main">
     <h2 class="w-100 mb-4 text-center">Select Option:</h2>
     <div>
-      <a href="{{ url("/posts") }}" class="btn btn-primary p-3 mr-3">POSTS</a>
+      <a href="{{ url("/posts") }}" class="btn btn-primary p-3">POSTS</a>
       <a href="{{ url("/users") }}" class="btn btn-warning p-3 ml-3">USERS</a>
+      <a href="{{ url("/login") }}" class="btn btn-info p-3 ml-3">LOGIN</a>
     </div>
   </div>
 </div>

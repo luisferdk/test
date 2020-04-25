@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/users', 'UserController');
+Route::resource('/users', 'UserController')->middleware('can:isAdmin');
 Route::resource('/posts', 'PostController');
 Route::resource('/comments', 'CommentController');
 

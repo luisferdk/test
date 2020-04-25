@@ -15,6 +15,10 @@
                     @endif
 
                     You are logged in!
+                    <div class="mt-4">
+                      <a href="{{ url("/posts") }}" class="btn btn-primary p-3">POSTS</a>
+                      <a href="{{ url("/users") }}" class="btn btn-warning p-3 ml-3">USERS</a>
+                    </div>
                 </div>
             </div>
         </div>
