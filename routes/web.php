@@ -21,3 +21,7 @@ Route::get('/', function () {
 Route::resource('/users', 'UserController');
 Route::resource('/posts', 'PostController');
 Route::resource('/comments', 'CommentController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
