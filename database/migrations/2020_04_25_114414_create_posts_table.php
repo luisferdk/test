@@ -6,28 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePostsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->longText('description');
-            $table->unsignedInteger('user_id');
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('posts', function (Blueprint $table) {
+      $table->id();
+      $table->string('title');
+      $table->longText('description');
+      $table->unsignedInteger('user_id');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('posts');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('posts');
+  }
 }
