@@ -9,7 +9,6 @@
       <div class="card">
         @csrf
         @method('PUT')
-        <input type="hidden" name="post_id" value="{{ $comment->post_id }}">
         <div class="card-header">{{ $comment->post->description }}</div>
         <div class="card-body">
           <div class="form-group">

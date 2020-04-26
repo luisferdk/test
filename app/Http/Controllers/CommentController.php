@@ -89,8 +89,7 @@ class CommentController extends Controller
   {
     $request->validate([
       'description' => 'required|string|min:4',
-      'user_id' => 'required|integer',
-      'post_id' => 'required|integer',
+      'user_id' => 'required|integer'
     ]);
 
     $update = $comment->update($request->all());

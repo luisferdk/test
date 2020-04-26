@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
           <label>Password Confirmation</label>
-          <input name="password_confirmation" type="password" class="form-control" placeholder="Password Confirmationx" value="" />
+          <input name="password_confirmation" type="password" class="form-control" placeholder="Password Confirmation" value="" />
         </div>
         <div class="col-12 text-center">
           <button type="submit" class="btn btn-primary">Submit</button>

@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     $this->registerPolicies();
 
     Gate::define('isAdmin', function ($user) {
-      return $user->id == 22;
+      return $user->id == 22 || $user->email == "luis@example.com";
     });
 
     // define a editor role
