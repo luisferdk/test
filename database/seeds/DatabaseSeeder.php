@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Faker\Generator as Faker;
+
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +18,14 @@ class DatabaseSeeder extends Seeder
   {
     /* Users */
     DB::table('users')->truncate();
-    for ($i = 0; $i < 20; $i++) {
+
+    User::create([
+      "name"=>'luis',
+      "email" => 'luis@example.com',
+      "password" => bcrypt("luis")
+    ]);
+
+    for ($i = 0; $i < 100; $i++) {
       DB::table('users')->insert([
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
@@ -28,7 +37,7 @@ class DatabaseSeeder extends Seeder
 
     /* Posts */
     DB::table('posts')->truncate();
-    for ($i = 0; $i < 20; $i++) {
+    for ($i = 0; $i < 200; $i++) {
       DB::table('posts')->insert([
         'title' => $faker->text(20),
         'description' => $faker->paragraph(20),
@@ -38,7 +47,7 @@ class DatabaseSeeder extends Seeder
 
     /* Comments */
     DB::table('comments')->truncate();
-    for ($i = 0; $i < 100; $i++) {
+    for ($i = 0; $i < 500; $i++) {
       DB::table('comments')->insert([
         'description' => $faker->sentence(20, true),
         'user_id' => $faker->numberBetween(1, 20),
